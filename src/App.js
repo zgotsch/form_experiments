@@ -12,7 +12,7 @@ class App extends Component<{}> {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src={logo} className="App-logo" aglt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
@@ -21,8 +21,11 @@ class App extends Component<{}> {
         <QueryRenderer
           environment={environment}
           query={graphql`
-            query AppHelloQuery {
-              hello
+            query AppPeopleQuery {
+              people {
+                id
+                name
+              }
             }
           `}
           variables={{}}
@@ -33,7 +36,18 @@ class App extends Component<{}> {
             if (!props) {
               return <div>Loading...</div>;
             }
-            return <div>{props.hello}</div>;
+            return (
+              <div>
+                {props.people.map(({ id, name }) => {
+                  return (
+                    <ul>
+                      <li>Id: {id}</li>
+                      <li>Name: {name}</li>
+                    </ul>
+                  );
+                })}
+              </div>
+            );
           }}
         />
       </div>

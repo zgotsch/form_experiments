@@ -1,5 +1,18 @@
+type Mutation {
+  createPerson(input: PersonInput!): Person
+}
+
+type Person {
+  id: ID!
+  name: String!
+}
+
+input PersonInput {
+  name: String!
+}
+
 type Query {
   id: ID
-  hello: String
-  goodbye: String
+  person(id: ID!): Person
+  people: [Person!]!
 }
